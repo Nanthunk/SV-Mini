@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SV Mini Resort – Your Dream Destination Wedding Venue</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a9e5c;
+    --green-dark: #157a47;
+    --green-light: #e8f7ef;
+    --gold: #c9a84c;
+    --dark: #1a1a2e;
+    --text: #374151;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --white: #ffffff;
+    --bg: #f9fafb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+  }
+  .nav-logo { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--dark); }
+  .nav-logo span { color: var(--green); font-weight: 700; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text); font-size: 0.92rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a.active {
+    border: 1.5px solid var(--dark); border-radius: 6px; padding: 4px 12px;
+  }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-phone { color: var(--green); font-size: 1.2rem; }
+  .btn-book {
+    background: var(--green); color: white; border: none; border-radius: 8px;
+    padding: 10px 22px; font-size: 0.92rem; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-book:hover { background: var(--green-dark); }
+
+  /* ── SECTION HEADER ── */
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--dark); }
+  .section-header h2 span { color: var(--green); }
+  .section-header p { color: var(--muted); margin-top: 10px; font-size: 1rem; }
+  .divider {
+    width: 80px; height: 3px; margin: 16px auto 0;
+    background: linear-gradient(90deg, var(--gold) 60%, var(--green) 100%);
+    border-radius: 2px;
+  }
+
+  /* ── HERO ── */
+  #about {
+    min-height: 100vh; position: relative;
+    background: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&q=80') center/cover no-repeat;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.55) 100%);
+  }
+  .hero-content { position: relative; text-align: center; color: white; padding: 0 20px; }
+  .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 3.6rem; font-weight: 700; margin-bottom: 12px; }
+  .hero-content .tagline { color: var(--green); font-size: 1.3rem; font-weight: 500; margin-bottom: 6px; }
+  .hero-content .location { font-size: 1rem; margin-bottom: 16px; opacity: 0.9; }
+  .hero-content .desc { max-width: 520px; margin: 0 auto 36px; font-size: 1rem; opacity: 0.85; line-height: 1.6; }
+  .hero-buttons { display: flex; gap: 16px; justify-content: center; }
+  .btn-primary {
+    background: var(--green); color: white; padding: 13px 28px;
+    border-radius: 8px; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.15); color: white; padding: 13px 28px;
+    border-radius: 8px; border: 2px solid rgba(255,255,255,0.6); font-size: 1rem; font-weight: 600; cursor: pointer;
+    backdrop-filter: blur(4px); transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+  .hero-scroll { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 1.4rem; animation: bounce 1.8s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ── FEATURES ── */
+  #features { padding: 100px 48px; background: var(--white); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .feature-card {
+    border: 1px solid var(--border); border-radius: 12px; padding: 28px;
+    display: flex; align-items: flex-start; gap: 18px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .feature-card:hover { box-shadow: 0 8px 32px rgba(26,158,92,0.1); transform: translateY(-3px); }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 10px; background: var(--green);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.3rem;
+  }
+  .feature-card h3 { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .feature-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── WEDDING ── */
+  #wedding { padding: 100px 48px; background: var(--bg); }
+  .wedding-inner { max-width: 1100px; margin: 0 auto; }
+  .wedding-image {
+    width: 100%; height: 420px; border-radius: 16px; overflow: hidden; margin-bottom: 48px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .wedding-image img { width: 100%; height: 100%; object-fit: cover; }
+  .wedding-features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .w-feat {
+    background: white; border-radius: 12px; padding: 28px 20px; text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .w-feat-icon {
+    width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+  }
+  .w-feat h3 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .w-feat p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── GALLERY ── */
+  #gallery { padding: 100px 48px; background: var(--white); }
+  .gallery-inner { max-width: 1100px; margin: 0 auto; }
+  .gallery-filters { display: flex; gap: 10px; justify-content: center; margin-bottom: 36px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 8px 22px; border-radius: 999px; border: 1.5px solid var(--border);
+    background: white; color: var(--text); font-size: 0.9rem; font-weight: 500; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--green); color: white; border-color: var(--green); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+  .gallery-item {
+    overflow: hidden; border-radius: 12px; cursor: pointer; position: relative;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+  }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gallery-item:nth-child(1) { grid-row: span 2; min-height: 420px; }
+  .gallery-item:nth-child(3) { grid-row: span 2; min-height: 420px; }
+  .gallery-item:nth-child(2), .gallery-item:nth-child(4),
+  .gallery-item:nth-child(5), .gallery-item:nth-child(6) { height: 200px; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { padding: 100px 48px; background: var(--bg); }
+  .testimonials-inner { max-width: 900px; margin: 0 auto; }
+  .testimonial-slider { position: relative; overflow: hidden; }
+  .testimonial-card {
+    background: white; border-radius: 16px; padding: 52px 64px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.08); text-align: center;
+    max-width: 780px; margin: 0 auto;
+  }
+  .stars { font-size: 1.6rem; margin-bottom: 24px; color: #f59e0b; }
+  .testimonial-card blockquote {
+    font-style: italic; font-size: 1.08rem; line-height: 1.7; color: var(--text);
+    margin-bottom: 28px;
+  }
+  .reviewer { display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .reviewer img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
+  .reviewer-name { font-weight: 600; color: var(--dark); font-size: 1rem; }
+  .reviewer-type { color: var(--green); font-size: 0.88rem; }
+  .slider-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 28px;
+  }
+  .slider-btn {
+    width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border);
+    background: white; cursor: pointer; font-size: 1.1rem; color: var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .slider-btn:hover { border-color: var(--green); color: var(--green); }
+  .slider-dots { display: flex; gap: 8px; }
+  .dot {
+    width: 10px; height: 10px; border-radius: 999px; background: var(--border);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .dot.active { background: var(--green); width: 28px; }
+
+  /* ── CONTACT ── */
+  #contact { padding: 100px 48px; background: var(--white); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .contact-info h3 { font-size: 1.5rem; font-weight: 700; color: var(--dark); margin-bottom: 28px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
+  .contact-icon {
+    width: 46px; height: 46px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .contact-item h4 { font-size: 0.9rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .contact-item a, .contact-item p { font-size: 0.9rem; color: var(--green); text-decoration: none; }
+  .map-embed { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .map-embed iframe { display: block; }
+
+  /* Booking form */
+  .booking-form {
+    background: white; border: 1px solid var(--border); border-radius: 16px; padding: 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .booking-form h3 { font-size: 1.4rem; font-weight: 700; color: var(--dark); margin-bottom: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.88rem; font-weight: 500; color: var(--dark); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: inherit; font-size: 0.92rem; color: var(--text); outline: none;
+    transition: border-color 0.2s; background: white;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--green);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-submit {
+    width: 100%; padding: 14px; background: var(--green); color: white;
+    border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.2s;
+  }
+  .btn-submit:hover { background: var(--green-dark); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); color: rgba(255,255,255,0.6); text-align: center;
+    padding: 24px 48px; font-size: 0.88rem;
+  }
+  footer span { color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>SV</span> Mini Resort</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#wedding">Wedding</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="nav-phone">📞</span>
+    <button class="btn-book" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="about">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>SV Mini Resort</h1>
+    <p class="tagline">Your Dream Destination Wedding Venue</p>
+    <p class="location">in Vadasithur, Coimbatore</p>
+    <p class="desc">Celebrate unforgettable weddings, family events, and relaxing getaways amidst luxury, comfort, and nature.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Your Event</button>
+      <button class="btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+    </div>
+  </div>
+  <div class="hero-scroll">&#8964;</div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-header">
+    <h2>Exceptional <span>Features</span></h2>
+    <p>Discover the luxury amenities and world-class facilities that make SV Mini Resort<br>your perfect destination</p>
+    <div class="divider"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🛏️</div>
+      <div>
+        <h3>Luxury & Comfort Stay</h3>
+        <p>Premium accommodations with modern amenities and elegant interiors</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">❄️</div>
+      <div>
+        <h3>Premium Air-Conditioned Rooms</h3>
+        <p>Comfortable A/C rooms designed for relaxation and luxury</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💚</div>
+      <div>
+        <h3>Destination Wedding Venue</h3>
+        <p>Perfect setting for dream weddings surrounded by nature</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏊</div>
+      <div>
+        <h3>Adult Swimming Pool</h3>
+        <p>Spacious pool with crystal clear water for ultimate relaxation</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌊</div>
+      <div>
+        <h3>Kids Swimming Pool</h3>
+        <p>Safe and fun pool area designed especially for children</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📷</div>
+      <div>
+        <h3>Bamboo Theme Photo Zone</h3>
+        <p>Instagram-worthy photo spots with unique bamboo aesthetics</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <div>
+        <h3>Family & Corporate Events</h3>
+        <p>Versatile spaces for gatherings, reunions, and business events</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌿</div>
+      <div>
+        <h3>Nature-Inspired Environment</h3>
+        <p>Surrounded by lush greenery and peaceful natural beauty</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏟️</div>
+      <div>
+        <h3>Spacious Outdoor Event Area</h3>
+        <p>Large open spaces perfect for ceremonies and celebrations</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚗</div>
+      <div>
+        <h3>Ample Parking Facilities</h3>
+        <p>Convenient parking for all your guests</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEDDING -->
+<section id="wedding">
+  <div class="section-header">
+    <h2>Create Your Perfect <span>Wedding Story</span></h2>
+    <p>From intimate ceremonies to grand celebrations, SV Mini Resort provides a breathtaking venue<br>surrounded by nature and elegance.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="wedding-inner">
+    <div class="wedding-image">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80" alt="Wedding venue at SV Mini Resort">
+    </div>
+    <div class="wedding-features">
+      <div class="w-feat">
+        <div class="w-feat-icon" style="background:#e8f7ef;">💚</div>
+        <h3>Wedding Stage Area</h3>
+        <p>Beautiful stage setups for your special moments</p>
+      </div>
+      <div class="w-feat">
+        <div class="w-feat-icon" style="background:#fef9ec;">👥</div>
+        <h3>Reception Setup</h3>
+        <p>Elegant arrangements for your guests</p>
+      </div>
+      <div class="w-feat">
+        <div class="w-feat-icon" style="background:#e8f7ef;">✨</div>
+        <h3>Outdoor Decorations</h3>
+        <p>Stunning décor amidst natural beauty</p>
+      </div>
+      <div class="w-feat">
+        <div class="w-feat-icon" style="background:#fce8f3;">📸</div>
+        <h3>Photography Spots</h3>
+        <p>Instagram-worthy bamboo zone & gardens</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header">
+    <h2>Explore Our <span>Gallery</span></h2>
+    <p>Discover the beauty and elegance of SV Mini Resort through our stunning gallery</p>
+    <div class="divider"></div>
+  </div>
+  <div class="gallery-inner">
+    <div class="gallery-filters">
+      <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+      <button class="filter-btn" onclick="filterGallery('resort', this)">Resort</button>
+      <button class="filter-btn" onclick="filterGallery('rooms', this)">Rooms</button>
+      <button class="filter-btn" onclick="filterGallery('pools', this)">Pools</button>
+      <button class="filter-btn" onclick="filterGallery('weddings', this)">Weddings</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-cat="resort">
+        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80" alt="Resort exterior with palms">
+      </div>
+      <div class="gallery-item" data-cat="rooms">
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Luxury room interior">
+      </div>
+      <div class="gallery-item" data-cat="weddings">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Wedding outdoor setup">
+      </div>
+      <div class="gallery-item" data-cat="pools">
+        <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=600&q=80" alt="Infinity pool at sunset">
+      </div>
+      <div class="gallery-item" data-cat="resort">
+        <img src="https://images.unsplash.com/photo-1545579133-99bb5ad189be?w=600&q=80" alt="Mountain view resort">
+      </div>
+      <div class="gallery-item" data-cat="weddings">
+        <img src="https://images.unsplash.com/photo-1561131668-f63504fc549d?w=600&q=80" alt="Forest wedding setting">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header">
+    <h2>What Our <span>Guests Say</span></h2>
+    <p>Real experiences from real celebrations</p>
+    <div class="divider"></div>
+  </div>
+  <div class="testimonials-inner">
+    <div class="testimonial-slider">
+      <div class="testimonial-card" id="testimonialCard">
+        <div class="stars">★★★★★</div>
+        <blockquote id="testimonialQuote">"SV Mini Resort made our dream wedding come true! The venue was absolutely stunning, surrounded by nature, and the staff was incredibly professional. Our guests are still talking about the beautiful bamboo photo zone and the elegant setup."</blockquote>
+        <div class="reviewer">
+          <img id="reviewerImg" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=100&q=80" alt="Reviewer">
+          <div>
+            <div class="reviewer-name" id="reviewerName">Priya & Karthik</div>
+            <div class="reviewer-type" id="reviewerType">Wedding Celebration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="changeSlide(-1)">&#8249;</button>
+      <div class="slider-dots" id="sliderDots"></div>
+      <button class="slider-btn" onclick="changeSlide(1)">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <h2>Plan Your Next <span>Celebration</span></h2>
+    <p>Book your dream event at SV Mini Resort today</p>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h3>Get in Touch</h3>
+      <div class="contact-item">
+        <div class="contact-icon" style="background:#e8f7ef; color:var(--green);">📞</div>
+        <div>
+          <h4>Phone</h4>
+          <a href="tel:+919876543210">+91 98765 43210</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="background:#fef9ec; color:#c9a84c;">✉️</div>
+        <div>
+          <h4>Email</h4>
+          <a href="mailto:info@svminiresort.com">info@svminiresort.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="background:#e8f7ef; color:var(--green);">📍</div>
+        <div>
+          <h4>Location</h4>
+          <p style="color:var(--muted)!important">4/266A, Vadasithur<br>Coimbatore, Tamil Nadu 641202</p>
+        </div>
+      </div>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.8!2d76.9!3d10.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDU3JzAwLjAiTiA3NsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1"
+          width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="booking-form">
+      <h3>Book Your Event</h3>
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Your full name">
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="margin-bottom:0">
+          <label>Email *</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Phone *</label>
+          <input type="tel" placeholder="+91 12345 67890">
+        </div>
+      </div>
+      <div style="margin-top:16px"></div>
+      <div class="form-row">
+        <div class="form-group" style="margin-bottom:0">
+          <label>Event Type *</label>
+          <select>
+            <option value="">Select event type</option>
+            <option>Wedding</option>
+            <option>Reception</option>
+            <option>Corporate Event</option>
+            <option>Family Gathering</option>
+            <option>Birthday Party</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label>Event Date *</label>
+          <input type="date">
+        </div>
+      </div>
+      <div style="margin-top:16px"></div>
+      <div class="form-group">
+        <label>Expected Guests *</label>
+        <input type="number" placeholder="Number of guests">
+      </div>
+      <div class="form-group">
+        <label>Additional Details</label>
+        <textarea placeholder="Tell us more about your event..."></textarea>
+      </div>
+      <button class="btn-submit">
+        <span>✈</span> Send Booking Request
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>SV Mini Resort</span> · 4/266A Vadasithur, Coimbatore, Tamil Nadu 641202 · All rights reserved.</p>
+</footer>
+
+<script>
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+
+  // Gallery filter
+  function filterGallery(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      if (cat === 'all' || item.dataset.cat === cat) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // Testimonials slider
+  const testimonials = [
+    {
+      quote: '"SV Mini Resort made our dream wedding come true! The venue was absolutely stunning, surrounded by nature, and the staff was incredibly professional. Our guests are still talking about the beautiful bamboo photo zone and the elegant setup."',
+      name: 'Priya & Karthik', type: 'Wedding Celebration',
+      img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=100&q=80'
+    },
+    {
+      quote: '"We hosted our company retreat here and it was phenomenal. The facilities are top-notch, the food was amazing, and the natural surroundings made it a refreshing change from the city. Highly recommend!"',
+      name: 'Rajesh Kumar', type: 'Corporate Event',
+      img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80'
+    },
+    {
+      quote: '"Our family reunion at SV Mini Resort was a magical experience. The kids loved the pool, adults enjoyed the serene gardens, and the staff took care of every detail. We\'ll be back every year!"',
+      name: 'Meera & Family', type: 'Family Reunion',
+      img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80'
+    },
+    {
+      quote: '"The bamboo photo zone is absolutely stunning! Our wedding photos turned out like a fairytale. The outdoor setup, greenery, and professional service made our special day truly unforgettable."',
+      name: 'Anitha & Suresh', type: 'Wedding Celebration',
+      img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80'
+    }
+  ];
+
+  let currentSlide = 0;
+  const dots = document.getElementById('sliderDots');
+
+  testimonials.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goToSlide(i);
+    dots.appendChild(d);
+  });
+
+  function goToSlide(n) {
+    currentSlide = (n + testimonials.length) % testimonials.length;
+    const t = testimonials[currentSlide];
+    document.getElementById('testimonialQuote').textContent = t.quote;
+    document.getElementById('reviewerName').textContent = t.name;
+    document.getElementById('reviewerType').textContent = t.type;
+    document.getElementById('reviewerImg').src = t.img;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  }
+
+  function changeSlide(dir) { goToSlide(currentSlide + dir); }
+
+  // Auto-slide
+  setInterval(() => changeSlide(1), 5000);
+</script>
+</body>
+</html>
